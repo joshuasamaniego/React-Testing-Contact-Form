@@ -9,9 +9,9 @@ test('renders without errors', async () => {
 
     //Act:
     //  1. Get our firstName, lastName, email, message input fields.
-    const firstNameInput = screen.getByPlaceholderText(/edd/i);
-    const lastNameInput = screen.getByPlaceholderText(/burke/i);
-    const emailInput = screen.getByPlaceholderText(/bluebill1049@hotmail.com/i);
+    const firstNameInput = screen.getByLabelText(/first name/i);
+    const lastNameInput = screen.getByLabelText(/last name/i);
+    const emailInput = screen.getByLabelText(/email/i);
     const messageInput = screen.getByLabelText(/message/i);
 
     //  2. Type values into our input fields.
@@ -25,8 +25,10 @@ test('renders without errors', async () => {
     userEvent.click(buttonInput);
     
     //Assert:
-    // Species name is on the screen.
-    const newInput = await screen.getByDisplayValue("Joe");
-    expect(newInput).toBeInTheDocument();
+    // Form input is on the screen.
+    const newFirstNameInput = await screen.findByText(/joe/i);
+    const newLastNameInput = await screen.findByText(/smith/i);
+    expect(newFirstNameInput).toBeInTheDocument();
+    expect(newLastNameInput).toBeInTheDocument();
 
 });
